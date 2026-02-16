@@ -7,6 +7,7 @@ import org.projeto.app.service.CadastroService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,4 +40,22 @@ public class CadastroController {
         response.put("mensagem", "médico cadastrado com sucesso!");
         return ResponseEntity.ok().body(response);
     }
+
+    @PutMapping("/alterarValorConsulta")
+    public ResponseEntity<Map<String, String>> alterar(@RequestParam long ID, @RequestParam BigDecimal valorConsulta){
+        service.alterarValorConsulta(ID, valorConsulta);
+        Map<String, String> response = new HashMap<>();
+        response.put("mensagem", "valor da consulta alterado com sucesso!");
+        return ResponseEntity.ok().body(response);
+    }
+
+    @DeleteMapping("/removerMedico/{ID}")
+    public ResponseEntity<Map<String, String>> remover(@PathVariable long ID){
+        service.deletarMedico(ID);
+        Map<String, String> response = new HashMap<>();
+        response.put("mensagem", "médico retirado com sucesso!");
+        return ResponseEntity.ok().body(response);
+    }
+
+
 }
